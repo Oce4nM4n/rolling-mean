@@ -10,14 +10,14 @@ customers = data['customerid'].unique()
 
 for customer in customers:
 	print(f"Customer ID: {customer}")
-	customer_data = data[data['customerid'].str.contains(customer)]
+	customer_data = data[data['customerid']==customer]
 	resources = customer_data['resourceid'].unique()
 
 	for resource in resources:
 		print(f"Resource ID: {resource}")
 
 		for i in range(predictedmonths):
-			resource_data = data[data['customerid'].str.contains(customer) & data['resourceid'].str.contains(resource)]
+			resource_data = data[(data['customerid'] == customer) & (data['resourceid'] == resource)]
 
 			latest_months = sorted(resource_data['month'].unique() ,reverse=True)[:3]
 			print(f"Latest months: {latest_months}")
